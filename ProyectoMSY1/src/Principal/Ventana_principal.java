@@ -874,7 +874,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        //********************************GRAFICAR****************************************************
     
        //**************************GRAFICA DE DESPLAZAMIENTO****************************************
-       //coordenadas tiempo eje x
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
        x1=trecorrido/8;
        x2=x1+x1;
        x3=x2+x1;
@@ -884,7 +884,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        x7=x6+x1;
        x8=x7+x1;
        
-       //coordenadas desplazamiento eje y
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
        y1 = ac*Math.pow(x1,2)/2;
        y2 = ac*Math.pow(x2,2)/2;
        y3 = ac*Math.pow(x3,2)/2;
@@ -893,7 +893,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        y6 = ac*Math.pow(x6,2)/2;
        y7 = ac*Math.pow(x7,2)/2;
        y8 = ac*Math.pow(x8,2)/2;
-       
+       //se redondean los tiempos a 5 decimales 
        x1 = Math.round(x1 * factor) / factor;
        x2 = Math.round(x2 * factor) / factor;
        x3 = Math.round(x3 * factor) / factor;
@@ -903,12 +903,14 @@ public class Ventana_principal extends javax.swing.JFrame {
        x7 = Math.round(x7 * factor) / factor;
        x8 = Math.round(x8 * factor) / factor;
        
-       
-       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,"Desplazamiento_Lamborginhi");
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO LAMBORGINHI",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,"Desplazamiento_Lamborginhi");
        
       
        //**************************GRAFICA DE VELOCIDAD*********************************
-       //coordenadas velocidad eje y
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
        v1 = ac*x1;
        if (v1>(Datos_estaticos.L_Velocidad_max*1000/3600)){
            v1=Datos_estaticos.L_Velocidad_max*1000/3600;
@@ -945,7 +947,7 @@ public class Ventana_principal extends javax.swing.JFrame {
            v8=Datos_estaticos.L_Velocidad_max*1000/3600;
        }
        
-       Graficar.graph("Distancia","VELOCIDAD-TIEMPO",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_Lamborginhi");
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO LAMBORGINHI",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_Lamborginhi");
        
        }
     
@@ -991,6 +993,85 @@ public class Ventana_principal extends javax.swing.JFrame {
        
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"Volkswagen",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       
+            //********************************GRAFICAR****************************************************
+    
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
+       
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO VOLKSWAGEN",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,"Desplazamiento_VolksWagen");
+       
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO VOLKSWAGEN",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_VolksWagen");
+       
        }
     
        //***********************************************MCLAREN**************************************************
@@ -1036,9 +1117,83 @@ public class Ventana_principal extends javax.swing.JFrame {
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"McLaren",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
        
-        
-        
-        
+         //********************************GRAFICAR****************************************************
+    
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
+       
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO McLAREN",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,"Desplazamiento_McLaren");
+       
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO MCLAREN",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_McLaren");
         
         }
         
@@ -1088,7 +1243,87 @@ public class Ventana_principal extends javax.swing.JFrame {
        
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"Ford",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+      
+          //********************************GRAFICAR****************************************************
+    
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
+       
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO FORD",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,"Desplazamiento_Ford");
+       
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.F_Velocidad_max*1000/3600;
        }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO VOLKSWAGEN",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_VolksWagen");
+       
+         
+         }
     
     }
     
