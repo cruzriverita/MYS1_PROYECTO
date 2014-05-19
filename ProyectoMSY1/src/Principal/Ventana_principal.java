@@ -639,6 +639,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     
     }
     //***************funcion para cambar los datos cuando elejan el las lista desplegable. ******************/
+   //4 opciones diferentes
     public void poner_datos(int index){
         switch(index){
             case 0:
