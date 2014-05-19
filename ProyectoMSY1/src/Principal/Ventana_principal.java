@@ -554,6 +554,9 @@ public class Ventana_principal extends javax.swing.JFrame {
         // esto es lo mismo que el boton del dibujo del carro
        int cantidad=Datos_estaticos.Lista_simulacion.size();  // obrengo el tamaño de la lista
        if(cantidad <=3){  // verifico si ya hay 4 elemento sino entra   
+        jComboBox1.setSelectedIndex(0);
+       jComboBox2.setSelectedIndex(0);
+       Datos_estaticos.distancia = 500;
        poner_datos(0); 
        jDialog1.setVisible(true);
        jDialog1.setSize(500,350);
@@ -564,7 +567,6 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        
           jDialog2.setBounds(100, 100, 1200, 300);
           jDialog2.show();
           jDialog2.setLocationRelativeTo(null);
@@ -626,7 +628,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        vista_datos.setVisible(true);
        
        // creo el nuevo elemento para la lista del simulaciones ***********/
-       Nodo_simulacion uno = new Nodo_simulacion(imagen,nuevo,vista_datos,Datos_estaticos.distancia/2,Integer.valueOf(caracteristicas1.getText()),10,10); 
+       Nodo_simulacion uno = new Nodo_simulacion(imagen,nuevo,vista_datos,Datos_estaticos.tipo_carro,Datos_estaticos.distancia,Integer.valueOf(caracteristicas1.getText()),10,10); 
        nuevo.pone_imagen(uno.obten_imagen().getImage()); // agrego la imagen del carro  que fue selecionado
        Datos_estaticos.Lista_simulacion.add(uno); //agrego el nodo de la simulacion a la lista de simulaicion
        this.jPanel1.add(nuevo); // agrego el panel pista al panel principal
@@ -789,6 +791,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.L_aceleracion2));
                 imagen = new ImageIcon(Datos_estaticos.L_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
+                Datos_estaticos.tipo_carro =0;
                 break;
             case 1:
                 this.caracteristicas.setText(Datos_estaticos.M_nombre);
@@ -797,6 +800,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.M_aceleracion2));
                 imagen = new ImageIcon(Datos_estaticos.M_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
+                Datos_estaticos.tipo_carro =1;
                 break;
             case 2:
                 this.caracteristicas.setText(Datos_estaticos.Vw_nombre);
@@ -805,6 +809,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.Vw_aceleracion2));
                 imagen = new ImageIcon(Datos_estaticos.Vw_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
+                Datos_estaticos.tipo_carro =2;
                 break;
             case 3:
                this.caracteristicas.setText(Datos_estaticos.F_nombre);
@@ -813,6 +818,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.F_aceleracion2));
                 imagen = new ImageIcon(Datos_estaticos.F_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
+                Datos_estaticos.tipo_carro =3;
                 break;
             default:
                 break; 

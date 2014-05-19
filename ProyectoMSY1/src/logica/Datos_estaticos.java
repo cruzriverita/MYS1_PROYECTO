@@ -54,6 +54,7 @@ public class Datos_estaticos {
     
    /************************** variables para utilizar en la ventana de leeccion de carro****************/
     public static  int distancia=500;
+    public static  int tipo_carro=0;
     
    
     

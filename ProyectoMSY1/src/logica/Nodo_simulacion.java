@@ -28,13 +28,14 @@ public class Nodo_simulacion {
     int pos_x =10;
     int pos_y =40;
     
+    int tipo_carro; // es para saver que tipo de carro se escogio  0->lambo 1->mcla 2->VW  3-> Ford
     //variables para el momento de la simulaion
     JLabel datos ;
     /***************puntero para el hilo /******************/
     hilo_para_simulacion hilo;
     
     //metodo para colocar los valores predeterminados
-    public Nodo_simulacion(ImageIcon imagen,Coloca_imagen pista,JLabel datos,int distancia,int velocidad,int aceleracion,int tiempo){
+    public Nodo_simulacion(ImageIcon imagen,Coloca_imagen pista,JLabel datos,int tipo,int distancia,int velocidad,int aceleracion,int tiempo){
     this.Nombre_imgen = imagen;
     this.pista =pista;
     this.distancia =distancia;
@@ -42,7 +43,7 @@ public class Nodo_simulacion {
     this.aceleracion=aceleracion;
     this.tiempo = tiempo;
     this.datos = datos;
-   
+    this.tipo_carro = tipo;
     hilo = new hilo_para_simulacion(pista,500,distancia);
    
     }
