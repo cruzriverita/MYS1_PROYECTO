@@ -34,7 +34,7 @@ public class Ventana_principal extends javax.swing.JFrame {
      double tvelmax=0;
      double dvelmax=0;
      double trecorrido=0;
-     static double x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,v1,v2,v3,v4,v5;
+     static double x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,v1,v2,v3,v4,v5,x0,y0,v0;
      
      
      //probicional tiene que ser una lista
@@ -882,12 +882,19 @@ public class Ventana_principal extends javax.swing.JFrame {
        x5=x4+x1;
        
        //coordenadas desplazamiento eje y
-       y1 = Integer.parseInt(jComboBox2.getSelectedItem().toString())/5;
-       y2=y1+y1;
-       y3=y2+y1;
-       y4=y3+y1;
-       y5=y4+y1;
-       Graficar.graph(x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,"Desplazamiento_Lamborginhi");
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       
+       System.out.println(x1+" , "+y1);
+       System.out.println(x2+" , "+y2);
+       System.out.println(x3+" , "+y3);
+       System.out.println(x4+" , "+y4);
+       System.out.println(x5+" , "+y5);
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO",x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,"Desplazamiento_Lamborginhi");
+       
       
        //**************************GRAFICA DE VELOCIDAD*********************************
        //coordenadas velocidad eje y
