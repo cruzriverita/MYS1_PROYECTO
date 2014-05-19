@@ -5,6 +5,8 @@ package Principal;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import logica.*;
 
@@ -97,7 +99,7 @@ public class Ventana_principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
 
         jDialog1.setTitle("Agregar Carro");
-        jDialog1.setBackground(new java.awt.Color(255, 255, 255));
+        jDialog1.setBackground(new java.awt.Color(255, 204, 51));
         jDialog1.setLocationByPlatform(true);
         jDialog1.setResizable(false);
 
@@ -288,6 +290,15 @@ public class Ventana_principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialog2.setBackground(new java.awt.Color(255, 204, 102));
+        jDialog2.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jDialog2WindowClosing(evt);
+            }
+        });
+
+        jTable2.setBorder(new javax.swing.border.MatteBorder(null));
+        jTable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -296,7 +307,21 @@ public class Ventana_principal extends javax.swing.JFrame {
                 "Automovil", "Aceleracion ", "Distancia en alcanzar los 200km/h", "Velocidad final alcanzada", "t en alcanzar Velocidad maxima", "Distancia donde alcanza la V. Max.", "t en completar Recorrido"
             }
         ));
+        jTable2.setCellSelectionEnabled(true);
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable2.setRowHeight(20);
         jScrollPane2.setViewportView(jTable2);
+        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable2.getColumnModel().getColumn(0).setResizable(false);
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jTable2.getColumnModel().getColumn(4).setResizable(false);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(5).setResizable(false);
+        jTable2.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(6).setResizable(false);
 
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
@@ -304,15 +329,15 @@ public class Ventana_principal extends javax.swing.JFrame {
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -537,8 +562,10 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-          jDialog2.setBounds(100, 100, 1100, 400);
+        
+          jDialog2.setBounds(100, 100, 1200, 300);
           jDialog2.show();
+          jDialog2.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -546,11 +573,9 @@ public class Ventana_principal extends javax.swing.JFrame {
         try{
         Datos_estaticos.Lista_simulacion.clear(); //limpio la lista para que no tenga ninigun elemeto
         this.dispose();
-         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana_principal().setVisible(true);
-            }
-        });
+        Ventana_principal nuevo = new Ventana_principal();
+        nuevo.setVisible(true);
+        nuevo.setLocationRelativeTo(null);
         }
         catch(Exception e){  
               System.out.println(e);
@@ -671,9 +696,25 @@ public class Ventana_principal extends javax.swing.JFrame {
      }  
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jDialog2WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog2WindowClosing
+        // TODO add your handling code here:
+        this.limpiarTabla(jTable2);
+    
+    }//GEN-LAST:event_jDialog2WindowClosing
+
    
     
-    
+    public void limpiarTabla(JTable tabla){
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
+            int filas=tabla.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+    }
     
 /***************************** funcion para eliminar un carro y reposicionar los restantes *********************/
     public void elimina_carro(int  posicion){
@@ -781,7 +822,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     public void calculos (){
      //Agregar modelo a la tabla de resultados 
       DefaultTableModel modelo1=(DefaultTableModel) jTable2.getModel();
-       
+     
         
         //DECISION SOBRE QUE DATOS MOSTRAR
       
@@ -988,12 +1029,10 @@ public class Ventana_principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Ventana_principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-    java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana_principal().setVisible(true);
-            }
-        });
         
+        Ventana_principal nuevo = new Ventana_principal();
+        nuevo.setVisible(true);
+        nuevo.setLocationRelativeTo(null);
       
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
