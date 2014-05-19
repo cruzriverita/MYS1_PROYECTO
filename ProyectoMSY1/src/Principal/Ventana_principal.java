@@ -784,7 +784,8 @@ public class Ventana_principal extends javax.swing.JFrame {
        
         
         //DECISION SOBRE QUE DATOS MOSTRAR
-      // si se elige el lamborginhi
+      
+      //********************************lamborginhi************************************** 
        if (jComboBox1.getSelectedItem().equals("Lambor veneno")) {
        //CALCULOS
        //aceleracion constante
@@ -798,12 +799,12 @@ public class Ventana_principal extends javax.swing.JFrame {
        //de velocidad maxima del auto se coloca tal valor.
        // si vf > 355 km/h
        if (vf>(Datos_estaticos.L_Velocidad_max*1000/3600)){
-           vf=98.61;
+           vf=Datos_estaticos.L_Velocidad_max*1000/3600;
        }
        
        //tiempo en que el auto alcanza su velocidad maxima
        this.tvelmax = vf/ac;
-       this.dvelmax = (355*1000/3600)*tvelmax/2;
+       this.dvelmax = (Datos_estaticos.L_Velocidad_max*1000/3600)*tvelmax/2;
        
        /*sino alcanza la velocidad maxima antes de terminar de recorrer toda la pista entonces 
         * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
@@ -827,6 +828,137 @@ public class Ventana_principal extends javax.swing.JFrame {
        modelo1.addRow(new Object[]{"Lamborghini",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
        }
     
+       //**********************Vokswagen*********************************//
+       
+       else if (jComboBox1.getSelectedItem().equals("Volkswagen scirocco")) {
+       //CALCULOS
+       //aceleracion constante
+       this.ac=(200*1000)/(3600*Datos_estaticos.Vw_aceleracion2);
+       //distancia en alcanzar 200km/h
+       this.df = (ac*(Datos_estaticos.Vw_aceleracion2)*(Datos_estaticos.Vw_aceleracion2))/2;
+       //velocidad final alcanzada por el auto
+       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       
+       //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
+       //de velocidad maxima del auto se coloca tal valor.
+       // si vf > 355 km/h
+       if (vf>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           vf=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+       //tiempo en que el auto alcanza su velocidad maxima
+       this.tvelmax = vf/ac;
+       this.dvelmax = (Datos_estaticos.Vw_Velocidad_max*1000/3600)*tvelmax/2;
+       
+       /*sino alcanza la velocidad maxima antes de terminar de recorrer toda la pista entonces 
+        * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
+        * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
+        */
+       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       tvelmax =0;
+       dvelmax=0;
+       }
+       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       
+       //redondeo de todos los calculos a 5 decimales.
+       ac = Math.round(ac * factor) / factor;
+       df = Math.round(df * factor) / factor;
+       vf = Math.round(vf * factor) / factor;
+       tvelmax = Math.round(tvelmax * factor) / factor;
+       dvelmax = Math.round(dvelmax * factor) / factor;
+       trecorrido = Math.round(trecorrido * factor) / factor;
+       
+       //se agrega la fila a la tabla
+       modelo1.addRow(new Object[]{"Volkswagen",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       }
+    
+       //***********************************************MCLAREN**************************************************
+       
+        else if (jComboBox1.getSelectedItem().equals("Mclaren Spider")) {
+       //CALCULOS
+       //aceleracion constante
+       this.ac=(200*1000)/(3600*Datos_estaticos.M_aceleracion2);
+       //distancia en alcanzar 200km/h
+       this.df = (ac*(Datos_estaticos.M_aceleracion2)*(Datos_estaticos.M_aceleracion2))/2;
+       //velocidad final alcanzada por el auto
+       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       
+       //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
+       //de velocidad maxima del auto se coloca tal valor.
+       // si vf > 355 km/h
+       if (vf>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           vf=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+       //tiempo en que el auto alcanza su velocidad maxima
+       this.tvelmax = vf/ac;
+       this.dvelmax = (Datos_estaticos.M_Velocidad_max*1000/3600)*tvelmax/2;
+       
+       /*sino alcanza la velocidad maxima antes de terminar de recorrer toda la pista entonces 
+        * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
+        * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
+        */
+       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       tvelmax =0;
+       dvelmax=0;
+       }
+       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       
+       //redondeo de todos los calculos a 5 decimales.
+       ac = Math.round(ac * factor) / factor;
+       df = Math.round(df * factor) / factor;
+       vf = Math.round(vf * factor) / factor;
+       tvelmax = Math.round(tvelmax * factor) / factor;
+       dvelmax = Math.round(dvelmax * factor) / factor;
+       trecorrido = Math.round(trecorrido * factor) / factor;
+       
+       //se agrega la fila a la tabla
+       modelo1.addRow(new Object[]{"McLaren",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       }
+       
+       //***********************************************FORD MUSTANG****************************************
+       
+         else if (jComboBox1.getSelectedItem().equals("Ford Mustang")) {
+       //CALCULOS
+       //aceleracion constante
+       this.ac=(200*1000)/(3600*Datos_estaticos.F_aceleracion2);
+       //distancia en alcanzar 200km/h
+       this.df = (ac*(Datos_estaticos.F_aceleracion2)*(Datos_estaticos.F_aceleracion2))/2;
+       //velocidad final alcanzada por el auto
+       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       
+       //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
+       //de velocidad maxima del auto se coloca tal valor.
+       // si vf > 355 km/h
+       if (vf>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           vf=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+       //tiempo en que el auto alcanza su velocidad maxima
+       this.tvelmax = vf/ac;
+       this.dvelmax = (Datos_estaticos.F_Velocidad_max*1000/3600)*tvelmax/2;
+       
+       /*sino alcanza la velocidad maxima antes de terminar de recorrer toda la pista entonces 
+        * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
+        * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
+        */
+       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       tvelmax =0;
+       dvelmax=0;
+       }
+       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       
+       //redondeo de todos los calculos a 5 decimales.
+       ac = Math.round(ac * factor) / factor;
+       df = Math.round(df * factor) / factor;
+       vf = Math.round(vf * factor) / factor;
+       tvelmax = Math.round(tvelmax * factor) / factor;
+       dvelmax = Math.round(dvelmax * factor) / factor;
+       trecorrido = Math.round(trecorrido * factor) / factor;
+       
+       //se agrega la fila a la tabla
+       modelo1.addRow(new Object[]{"Ford",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       }
     
     }
     
