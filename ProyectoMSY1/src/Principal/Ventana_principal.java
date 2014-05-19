@@ -23,7 +23,14 @@ public class Ventana_principal extends javax.swing.JFrame {
      */
      public  ImageIcon imagen;
 
-
+  double factor = 1e5;
+     //variables para calculos 
+     double ac=0;
+     double df=0;
+     double vf=0;
+     double tvelmax=0;
+     double dvelmax=0;
+     double trecorrido=0;
      
      //probicional tiene que ser una lista
      Coloca_imagen nuevo;
