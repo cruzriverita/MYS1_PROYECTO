@@ -6,7 +6,7 @@ package logica;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+
 
 
 /**
@@ -49,7 +49,7 @@ public class hilo_para_simulacion extends Thread {
                meta = true;  //*** cuando llega a la distancia acordada rompo el ciclo para que no siga caminado
               }
               else{
-               pista.pone_posicion(pos_x); // pono la nueva posicion en x del carro.
+               pista.pone_posicion(pos_x); // pone la nueva posicion en x del carro.
                pista.repaint(); // repinto el panel pista para que se vea el cambio de posicion 
              }
     
@@ -60,12 +60,19 @@ public class hilo_para_simulacion extends Thread {
     
     
     ///funcion para romper el hilo
-    void detener_hilo(){
+    public void detener_hilo(){
+     pista.pone_posicion(distancia); // pone al carro en el fin de la distancia
+     pista.repaint(); // repinto el panel pista para que se vea el cambio de posicion 
+     meta = true;
      this.stop();
     }
     
     //fucion para detener el hilo de la simulacion
-    void parar_hilo(){
+    public void parar_hilo(){
     this.suspend();
+    }
+    
+    public void reanudar_hilo(){
+    this.resume();
     }
 }

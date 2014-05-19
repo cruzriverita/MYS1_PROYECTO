@@ -1,11 +1,10 @@
 package Principal;
 
 
-import java.awt.Color;
-import java.awt.Container;
+
 import java.util.Iterator;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 import logica.*;
 
 /*
@@ -22,13 +21,14 @@ public class Ventana_principal extends javax.swing.JFrame {
     /**
      * Creates new form Ventana_principal
      */
-     public  ImageIcon imagen = new ImageIcon("Imagenes/carro_mcla.png");
+     public  ImageIcon imagen;
 
 
      
      //probicional tiene que ser una lista
      Coloca_imagen nuevo;
      Coloca_imagen nuevo2;
+     JLabel vista_datos;
      
      
     public Ventana_principal() {
@@ -36,7 +36,7 @@ public class Ventana_principal extends javax.swing.JFrame {
         
        /* creo el panel que se mira en el Jdialog donde se muestra el carro selecionado*/ 
        nuevo2 = new Coloca_imagen();
-       nuevo2.setBounds(15,90,80,80);
+       nuevo2.setBounds(15,90,90,80);
        nuevo2.setVisible(true);
        jDialog1.add(nuevo2);
        
@@ -68,7 +68,6 @@ public class Ventana_principal extends javax.swing.JFrame {
         caracteristicas2 = new javax.swing.JLabel();
         caracteristicas3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         eliminar1 = new javax.swing.JButton();
         eliminar2 = new javax.swing.JButton();
@@ -232,7 +231,9 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addGroup(jDialog1Layout.createSequentialGroup()
                         .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDialog1Layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
+                                .addContainerGap()
+                                .addComponent(jLabel9)
+                                .addGap(10, 10, 10)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDialog1Layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
@@ -252,14 +253,9 @@ public class Ventana_principal extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jDialog1Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(jLabel9)
-                    .addContainerGap(350, Short.MAX_VALUE)))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +266,8 @@ public class Ventana_principal extends javax.swing.JFrame {
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,24 +275,21 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addContainerGap())
-            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jDialog1Layout.createSequentialGroup()
-                    .addGap(73, 73, 73)
-                    .addComponent(jLabel9)
-                    .addContainerGap(227, Short.MAX_VALUE)))
         );
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        jLabel8.setText("Caracteristicas");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simulador_MRU");
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(943, 540));
+        jPanel1.setPreferredSize(new java.awt.Dimension(943, 550));
 
         eliminar1.setBackground(new java.awt.Color(255, 255, 255));
         eliminar1.setForeground(new java.awt.Color(255, 255, 255));
         eliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        eliminar1.setToolTipText("eliminar carro");
         eliminar1.setBorderPainted(false);
         eliminar1.setContentAreaFilled(false);
         eliminar1.setDefaultCapable(false);
@@ -308,6 +302,7 @@ public class Ventana_principal extends javax.swing.JFrame {
         eliminar2.setBackground(new java.awt.Color(255, 255, 255));
         eliminar2.setForeground(new java.awt.Color(255, 255, 255));
         eliminar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        eliminar2.setToolTipText("eliminar carro");
         eliminar2.setBorderPainted(false);
         eliminar2.setContentAreaFilled(false);
         eliminar2.setDefaultCapable(false);
@@ -319,6 +314,7 @@ public class Ventana_principal extends javax.swing.JFrame {
 
         eliminar3.setForeground(new java.awt.Color(255, 255, 255));
         eliminar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        eliminar3.setToolTipText("eliminar carro");
         eliminar3.setBorderPainted(false);
         eliminar3.setContentAreaFilled(false);
         eliminar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -331,6 +327,7 @@ public class Ventana_principal extends javax.swing.JFrame {
 
         eliminar4.setForeground(new java.awt.Color(255, 255, 255));
         eliminar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        eliminar4.setToolTipText("eliminar carro");
         eliminar4.setBorderPainted(false);
         eliminar4.setContentAreaFilled(false);
         eliminar4.setDefaultCapable(false);
@@ -351,20 +348,20 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addComponent(eliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(899, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(eliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addGap(99, 99, 99)
                 .addComponent(eliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(eliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addGap(104, 104, 104)
                 .addComponent(eliminar4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(70, 70, 70))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -384,6 +381,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         jButton2.setToolTipText("detener simulacion");
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mas_carro.png"))); // NOI18N
         jButton3.setToolTipText("agregar carro");
@@ -461,21 +463,22 @@ public class Ventana_principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 772, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -502,16 +505,15 @@ public class Ventana_principal extends javax.swing.JFrame {
         // Boton para nueva simulacion 
         try{
         Datos_estaticos.Lista_simulacion.clear(); //limpio la lista para que no tenga ninigun elemeto
-        jPanel1.removeAll(); // elimino todos los objetos que estan en el panael
-        /************ como se elina todo, vuelvo a agregar los cuatro botones de eliminar ya que estos siempre estan alli en modo invisible**********/
-        jPanel1.add(eliminar1);
-        jPanel1.add(eliminar2);
-        jPanel1.add(eliminar3);
-        jPanel1.add(eliminar4);
-        pone_invisible_eliminar();
+        this.dispose();
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Ventana_principal().setVisible(true);
+            }
+        });
         }
         catch(Exception e){  
-        
+              System.out.println(e);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -546,14 +548,24 @@ public class Ventana_principal extends javax.swing.JFrame {
        pone_visible_eliminar(cantidad);// llamo la funcion para poner visible el boton elimnar , le mando el valor del que toca
        /****************** creoo el nuevo panel que va hacer la pista *************************************/
        nuevo = new Coloca_imagen();
-       nuevo.setBounds(40,40+(110*cantidad),900,85);
+       nuevo.setBounds(40,40+(130*cantidad),900,85);
        nuevo.setVisible(true);
+       
+       /**************************************************************************************************************/
+       vista_datos = new JLabel();
+       vista_datos.setFont(new java.awt.Font("Tahoma", 3, 12));
+       vista_datos.setText(caracteristicas.getText());
+       vista_datos.setBounds(70,20+(130*cantidad),200,20);
+       vista_datos.setVisible(true);
+       
        // creo el nuevo elemento para la lista del simulaciones ***********/
-       Nodo_simulacion uno = new Nodo_simulacion(imagen,nuevo,Datos_estaticos.distancia/2,Integer.valueOf(caracteristicas1.getText()),10,10); 
+       Nodo_simulacion uno = new Nodo_simulacion(imagen,nuevo,vista_datos,Datos_estaticos.distancia/2,Integer.valueOf(caracteristicas1.getText()),10,10); 
        nuevo.pone_imagen(uno.obten_imagen().getImage()); // agrego la imagen del carro  que fue selecionado
        Datos_estaticos.Lista_simulacion.add(uno); //agrego el nodo de la simulacion a la lista de simulaicion
        this.jPanel1.add(nuevo); // agrego el panel pista al panel principal
+       this.jPanel1.add( vista_datos);
        this.jPanel1.repaint(); // repinto el panel principanl
+       
        jDialog1.setVisible(false); // pongo invisible el Jdialog por que ya termino la accion de agregar
         
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -590,6 +602,9 @@ public class Ventana_principal extends javax.swing.JFrame {
         // accion para el boton agregar carro  que esta en el dibujo
        int cantidad=Datos_estaticos.Lista_simulacion.size();  // obtengo el ramaño de la lista
        if(cantidad <=3){  //verifico si ya hay 4 elementos  si hay menos entro al if
+       jComboBox1.setSelectedIndex(0);
+       jComboBox2.setSelectedIndex(0);
+       Datos_estaticos.distancia = 500;
        poner_datos(0);   //se ponen los datos del carro lambo que va ser el que va estar por default selecionado
        jDialog1.setVisible(true);
        jDialog1.setSize(500,350);
@@ -609,7 +624,17 @@ public class Ventana_principal extends javax.swing.JFrame {
         elimina_carro(3);  // ingreso el de la posicion de la lista que se va a eliminar (3 por que la lista enpieza en  0)
     }//GEN-LAST:event_eliminar4ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // acction del boton stop
+      for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){ // recorro la lista de  simulacion
+      ite.next().obten_hilo().detener_hilo(); //para la simulacion de cada nodo en la lista         
+     }  
+    }//GEN-LAST:event_jButton2ActionPerformed
+
    
+    
+    
+    
 /***************************** funcion para eliminar un carro y reposicionar los restantes *********************/
     public void elimina_carro(int  posicion){
        pone_invisible_eliminar(); //pongo todo los botones eliminar invisibles para reajustar los elementos que no son removidos
@@ -617,10 +642,14 @@ public class Ventana_principal extends javax.swing.JFrame {
        Datos_estaticos.Lista_simulacion.remove(posicion); // elimino el nodo del carro que se solicito
        
      for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){ // recorro al lista para ver cules quedan
-            nuevo = ite.next().obten_pista();     // obtengo el nodo del recorrido
-            nuevo.setBounds(40,40+(110*numero),900,85); // le doy una nueva ubicacion
+             Nodo_simulacion cambiar = ite.next();
+            nuevo = cambiar.obten_pista();     // obtengo el nodo del recorrido
+            nuevo.setBounds(40,40+(130*numero),900,85); // le doy una nueva ubicacion
+            vista_datos = cambiar.obten_etiq();
+            vista_datos.setBounds(70,20+(130*numero),200,20);
             pone_visible_eliminar(numero); // llamo la funcion para poner el boton eleminar en modo visible
             numero+=1;  // sumo una para saver que ya dibuje uno
+            jPanel1.add(vista_datos);
             jPanel1.add(nuevo); // vuelvo agregar la pisa 
      }
      
@@ -642,13 +671,13 @@ public class Ventana_principal extends javax.swing.JFrame {
                  eliminar1.setVisible(true);
                 break;
                 case 1: 
-                 eliminar1.setVisible(true);
+                 eliminar2.setVisible(true);
                 break;
                     case 2: 
-                 eliminar1.setVisible(true);
+                 eliminar3.setVisible(true);
                 break;
                         case 3: 
-                 eliminar1.setVisible(true);
+                 eliminar4.setVisible(true);
                 break;
         }
   
@@ -749,10 +778,10 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JLabel caracteristicas1;
     private javax.swing.JLabel caracteristicas2;
     private javax.swing.JLabel caracteristicas3;
-    private javax.swing.JButton eliminar1;
-    private javax.swing.JButton eliminar2;
-    private javax.swing.JButton eliminar3;
-    private javax.swing.JButton eliminar4;
+    private static javax.swing.JButton eliminar1;
+    private static javax.swing.JButton eliminar2;
+    private static javax.swing.JButton eliminar3;
+    private static javax.swing.JButton eliminar4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -768,7 +797,6 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
