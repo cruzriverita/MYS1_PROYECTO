@@ -1320,7 +1320,7 @@ public class Ventana_principal extends javax.swing.JFrame {
            v8=Datos_estaticos.F_Velocidad_max*1000/3600;
        }
        
-       Graficar.graph("Distancia","VELOCIDAD-TIEMPO VOLKSWAGEN",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_VolksWagen");
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO FORD",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,"Velocidad_Ford");
        
          
          }
