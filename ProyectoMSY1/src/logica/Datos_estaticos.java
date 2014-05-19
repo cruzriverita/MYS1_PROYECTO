@@ -22,6 +22,7 @@ public class Datos_estaticos {
     public static final String L_imagen  = "Imagenes/carro_lambo.png";
     public static final String L_nombre = "Lambor Veneno Roadster";
     
+    
    /*****************Mclaren Spider******************************/
     public static final int M_peso = 1468;
     public static final int M_Velocidad_max = 329 ; //km/h

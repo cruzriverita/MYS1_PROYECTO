@@ -34,6 +34,8 @@ public class Ventana_principal extends javax.swing.JFrame {
      double tvelmax=0;
      double dvelmax=0;
      double trecorrido=0;
+     static double x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,v1,v2,v3,v4,v5;
+     
      
      //probicional tiene que ser una lista
      Coloca_imagen nuevo;
@@ -867,6 +869,31 @@ public class Ventana_principal extends javax.swing.JFrame {
        
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"Lamborghini",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       
+       
+       //********************************GRAFICAR****************************************************
+    
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x
+       x1=trecorrido/5;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       
+       //coordenadas desplazamiento eje y
+       y1 = Integer.parseInt(jComboBox2.getSelectedItem().toString())/5;
+       y2=y1+y1;
+       y3=y2+y1;
+       y4=y3+y1;
+       y5=y4+y1;
+       Graficar.graph(x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,"Desplazamiento_Lamborginhi");
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y
+      
+       
+       
        }
     
        //**********************Vokswagen*********************************//
