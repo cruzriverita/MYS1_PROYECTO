@@ -27,7 +27,7 @@ public class Coloca_imagen extends JPanel{
   private Image imagen;
   private int x=10;
   private int y=20;
-  public  ImageIcon carretera = new ImageIcon("c:/imagenes/carretera.png");
+  public  ImageIcon carretera = new ImageIcon("Imagenes/carretera.png");
   
    public Coloca_imagen(){
       
@@ -54,7 +54,7 @@ public class Coloca_imagen extends JPanel{
   /**********funcion de graphis que se activa cadas ves que un valor cambia**********/  
     @Override
     public void paint(Graphics g) {
-         g.drawImage(carretera.getImage(),5,5,790,70,this);
+         g.drawImage(carretera.getImage(),5,5,900,80,this);
          g.drawImage(imagen,x,y,75,40,this);
          setOpaque(false);
          super.paint(g);

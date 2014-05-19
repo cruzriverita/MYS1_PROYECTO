@@ -36,7 +36,7 @@ public class hilo_para_simulacion extends Thread {
     public void run(){
              
              while(!meta){
-                 pos_x+=10;  /*suma dias a la posicion**/
+                 pos_x+=5;  /*suma dias a la posicion**/
                  //aceleracion += aceleracion; //hay que furmarse uba formala para ver como cambia
                  try {
                    
@@ -44,21 +44,25 @@ public class hilo_para_simulacion extends Thread {
                  } catch (InterruptedException ex) {
                  Logger.getLogger(hilo_para_simulacion.class.getName()).log(Level.SEVERE, null, ex);
                  }
-              if(distancia == pos_x){
-                meta = true;
+              if(pos_x >= distancia){
+               meta = true;   
               }
               else{
                pista.pone_posicion(pos_x);
                pista.repaint();
              }
-    }
     
-              detener_hilo();
+             }
+             detener_hilo();
+              
     }
     
     
     ///funcion para romper el hilo
     void detener_hilo(){
      this.stop();
+    }
+    void parar_hilo(){
+    this.suspend();
     }
 }

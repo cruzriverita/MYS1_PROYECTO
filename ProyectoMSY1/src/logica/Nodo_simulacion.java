@@ -5,7 +5,7 @@
 package logica;
 
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+
 
 /**
  *
@@ -26,6 +26,11 @@ public class Nodo_simulacion {
     int pos_x =10;
     int pos_y =40;
     
+    //variables para el momento de la simulaion
+    
+    /***************puntero para el hilo /******************/
+    hilo_para_simulacion hilo;
+    
     //metodo para colocar los valores predeterminados
     public Nodo_simulacion(ImageIcon imagen,Coloca_imagen pista,int distancia,int velocidad,int aceleracion,int tiempo){
     this.Nombre_imgen = imagen;
@@ -34,6 +39,7 @@ public class Nodo_simulacion {
     this.velocidad = velocidad;
     this.aceleracion=aceleracion;
     this.tiempo = tiempo;
+    hilo = new hilo_para_simulacion(pista,500,distancia);
     
     }
     
@@ -61,7 +67,7 @@ public class Nodo_simulacion {
     }
     
     
-    //Metodos para obtener las variables
+    //Metodos para obtener las variables las cules se utilizadan para la simulacion
     public int obten_velocidad(){
     return velocidad;
     }
@@ -93,5 +99,13 @@ public class Nodo_simulacion {
     
     public ImageIcon obten_imagen(){
     return this.Nombre_imgen;
+    }
+    
+    public hilo_para_simulacion obten_hilo(){
+     return hilo;
+    }
+    public void iniciar_simulacion(){
+    hilo = new hilo_para_simulacion(pista,500,distancia);
+    hilo.start();
     }
 }
