@@ -665,6 +665,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     
     
     //***************funcion para cambar los datos cuando elejan el las lista desplegable. ******************/
+   //4 opciones diferentes
     public void poner_datos(int index){
             /*esta funcion solo setea los valores predeterminados de cada carro, segun sea el numero de peticion el cual es como estan en
            el comboBox si son setiado a las label que estan en el JDialog.*/
