@@ -5,6 +5,7 @@ package Principal;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 import logica.*;
 
 /*
@@ -75,6 +76,9 @@ public class Ventana_principal extends javax.swing.JFrame {
         caracteristicas2 = new javax.swing.JLabel();
         caracteristicas3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jDialog2 = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         eliminar1 = new javax.swing.JButton();
         eliminar2 = new javax.swing.JButton();
@@ -282,6 +286,33 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addContainerGap())
+        );
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Automovil", "Aceleracion ", "Distancia en alcanzar los 200km/h", "Velocidad final alcanzada", "t en alcanzar Velocidad maxima", "Distancia donde alcanza la V. Max.", "t en completar Recorrido"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -506,6 +537,8 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+          jDialog2.setBounds(100, 100, 1100, 400);
+          jDialog2.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -574,7 +607,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        this.jPanel1.repaint(); // repinto el panel principanl
        
        jDialog1.setVisible(false); // pongo invisible el Jdialog por que ya termino la accion de agregar
-        
+        this.calculos();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -745,6 +778,57 @@ public class Ventana_principal extends javax.swing.JFrame {
     
     }
     
+    public void calculos (){
+     //Agregar modelo a la tabla de resultados 
+      DefaultTableModel modelo1=(DefaultTableModel) jTable2.getModel();
+       
+        
+        //DECISION SOBRE QUE DATOS MOSTRAR
+      // si se elige el lamborginhi
+       if (jComboBox1.getSelectedItem().equals("Lambor veneno")) {
+       //CALCULOS
+       //aceleracion constante
+       this.ac=(200*1000)/(3600*Datos_estaticos.L_aceleracion2);
+       //distancia en alcanzar 200km/h
+       this.df = (ac*(Datos_estaticos.L_aceleracion2)*(Datos_estaticos.L_aceleracion2))/2;
+       //velocidad final alcanzada por el auto
+       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       
+       //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
+       //de velocidad maxima del auto se coloca tal valor.
+       // si vf > 355 km/h
+       if (vf>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           vf=98.61;
+       }
+       
+       //tiempo en que el auto alcanza su velocidad maxima
+       this.tvelmax = vf/ac;
+       this.dvelmax = (355*1000/3600)*tvelmax/2;
+       
+       /*sino alcanza la velocidad maxima antes de terminar de recorrer toda la pista entonces 
+        * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
+        * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
+        */
+       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       tvelmax =0;
+       dvelmax=0;
+       }
+       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       
+       //redondeo de todos los calculos a 5 decimales.
+       ac = Math.round(ac * factor) / factor;
+       df = Math.round(df * factor) / factor;
+       vf = Math.round(vf * factor) / factor;
+       tvelmax = Math.round(tvelmax * factor) / factor;
+       dvelmax = Math.round(dvelmax * factor) / factor;
+       trecorrido = Math.round(trecorrido * factor) / factor;
+       
+       //se agrega la fila a la tabla
+       modelo1.addRow(new Object[]{"Lamborghini",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       }
+    
+    
+    }
     
     /**
      * @param args the command line arguments
@@ -797,6 +881,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -815,5 +900,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
