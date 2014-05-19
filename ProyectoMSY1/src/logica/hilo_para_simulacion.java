@@ -16,15 +16,16 @@ import javax.swing.ImageIcon;
 public class hilo_para_simulacion extends Thread {
     
     /*************datos para la simulacion ********************/
-    Coloca_imagen pista;
-    int pos_x = 10;
+    Coloca_imagen pista; // puntero para manejar el panel que funciona como la pista de la simulacion
+    int pos_x = 10; // puntero para la posicion x. ya que solo se va a mover en horizontal
+    
     int aceleracion;
     int distancia;
 
     /***boleano para cuando llege a la distancia se termine el bucle************/
     boolean meta=false;
     
-    
+    /************* funcion ya se llama cuando se crea una instancia del hilo ***************************/
     public hilo_para_simulacion(Coloca_imagen pista,int aceleracion,int distancia){
     this.pista= pista;
     this.distancia = distancia;
@@ -45,15 +46,15 @@ public class hilo_para_simulacion extends Thread {
                  Logger.getLogger(hilo_para_simulacion.class.getName()).log(Level.SEVERE, null, ex);
                  }
               if(pos_x >= distancia){
-               meta = true;   
+               meta = true;  //*** cuando llega a la distancia acordada rompo el ciclo para que no siga caminado
               }
               else{
-               pista.pone_posicion(pos_x);
-               pista.repaint();
+               pista.pone_posicion(pos_x); // pono la nueva posicion en x del carro.
+               pista.repaint(); // repinto el panel pista para que se vea el cambio de posicion 
              }
     
              }
-             detener_hilo();
+             detener_hilo(); // cuando termina rompe el hilo para .. para no dejarlo correr mas
               
     }
     
@@ -62,6 +63,8 @@ public class hilo_para_simulacion extends Thread {
     void detener_hilo(){
      this.stop();
     }
+    
+    //fucion para detener el hilo de la simulacion
     void parar_hilo(){
     this.suspend();
     }

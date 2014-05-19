@@ -104,8 +104,9 @@ public class Nodo_simulacion {
     public hilo_para_simulacion obten_hilo(){
      return hilo;
     }
+    
     public void iniciar_simulacion(){
-    hilo = new hilo_para_simulacion(pista,500,distancia);
-    hilo.start();
+    hilo = new hilo_para_simulacion(pista,500,distancia); //creo el hilo que va a manejar la simulacion y seteo los valores que boy a utilizar
+    hilo.start(); // inicio el hilo para que empieze a correr el  carro
     }
 }

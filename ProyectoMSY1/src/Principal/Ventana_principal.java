@@ -34,16 +34,14 @@ public class Ventana_principal extends javax.swing.JFrame {
     public Ventana_principal() {
         initComponents();
         
+       /* creo el panel que se mira en el Jdialog donde se muestra el carro selecionado*/ 
        nuevo2 = new Coloca_imagen();
        nuevo2.setBounds(15,90,80,80);
        nuevo2.setVisible(true);
        jDialog1.add(nuevo2);
        
        /********** pone invisible los botones de eliminar*********/
-        eliminar1.setVisible(false);
-        eliminar2.setVisible(false);
-        eliminar3.setVisible(false);
-        eliminar4.setVisible(false);
+        pone_invisible_eliminar();
     }
    
    
@@ -485,15 +483,14 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
       // boton que esta en la barra de herramientas
-       int cantidad=Datos_estaticos.Lista_simulacion.size(); 
-       if(cantidad <=3){  
+        // esto es lo mismo que el boton del dibujo del carro
+       int cantidad=Datos_estaticos.Lista_simulacion.size();  // obrengo el tamaño de la lista
+       if(cantidad <=3){  // verifico si ya hay 4 elemento sino entra   
        poner_datos(0); 
        jDialog1.setVisible(true);
        jDialog1.setSize(500,350);
        jDialog1.repaint();
         }
-       
-       
        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -502,7 +499,20 @@ public class Ventana_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        // Boton para nueva simulacion 
+        try{
+        Datos_estaticos.Lista_simulacion.clear(); //limpio la lista para que no tenga ninigun elemeto
+        jPanel1.removeAll(); // elimino todos los objetos que estan en el panael
+        /************ como se elina todo, vuelvo a agregar los cuatro botones de eliminar ya que estos siempre estan alli en modo invisible**********/
+        jPanel1.add(eliminar1);
+        jPanel1.add(eliminar2);
+        jPanel1.add(eliminar3);
+        jPanel1.add(eliminar4);
+        pone_invisible_eliminar();
+        }
+        catch(Exception e){  
+        
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -512,53 +522,55 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        ///Boton para iniciar la simulacion
-     for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){
-            ite.next().iniciar_simulacion();         
+     for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){ // recorro la lista de  simulacion
+            ite.next().iniciar_simulacion(); //inicio la simulacion de cada nodo en la lista         
      }
      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void eliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar3ActionPerformed
         // elimina el carro que esta en la posision 3
-        jPanel1.removeAll();
-        elimina_carro(2);
+        jPanel1.removeAll(); //elimina todo lso elementos del panel
+        elimina_carro(2); // ingreso el de la posicion de la lista que se va a eliminar (3 por que la lista enpieza en  0)
     }//GEN-LAST:event_eliminar3ActionPerformed
 
     private void eliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar2ActionPerformed
         // elimina el carro que esta en la posicion 2
-        jPanel1.removeAll();
-        elimina_carro(1);
+        jPanel1.removeAll(); //elimina todo lso elementos del panel
+        elimina_carro(1); // ingreso el de la posicion de la lista que se va a eliminar (3 por que la lista enpieza en  0)
     }//GEN-LAST:event_eliminar2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         //boton que esta en el Jdialog ..  agregar
-        int cantidad=Datos_estaticos.Lista_simulacion.size();
-       pone_visible_eliminar(cantidad);
+      int cantidad=Datos_estaticos.Lista_simulacion.size(); //obtengo el tamaño de la lista para ver que elemnto toca colocar
+       pone_visible_eliminar(cantidad);// llamo la funcion para poner visible el boton elimnar , le mando el valor del que toca
+       /****************** creoo el nuevo panel que va hacer la pista *************************************/
        nuevo = new Coloca_imagen();
        nuevo.setBounds(40,40+(110*cantidad),900,85);
        nuevo.setVisible(true);
-       Nodo_simulacion uno = new Nodo_simulacion(imagen,nuevo,Datos_estaticos.distancia/2,Integer.valueOf(caracteristicas1.getText()),10,10);
-       nuevo.pone_imagen(uno.obten_imagen().getImage());
-       Datos_estaticos.Lista_simulacion.add(uno);
-       this.jPanel1.add(nuevo);
-       this.jPanel1.repaint();
-       jDialog1.setVisible(false);
+       // creo el nuevo elemento para la lista del simulaciones ***********/
+       Nodo_simulacion uno = new Nodo_simulacion(imagen,nuevo,Datos_estaticos.distancia/2,Integer.valueOf(caracteristicas1.getText()),10,10); 
+       nuevo.pone_imagen(uno.obten_imagen().getImage()); // agrego la imagen del carro  que fue selecionado
+       Datos_estaticos.Lista_simulacion.add(uno); //agrego el nodo de la simulacion a la lista de simulaicion
+       this.jPanel1.add(nuevo); // agrego el panel pista al panel principal
+       this.jPanel1.repaint(); // repinto el panel principanl
+       jDialog1.setVisible(false); // pongo invisible el Jdialog por que ya termino la accion de agregar
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // boton que cancela la creacion de un nuevo carro
-        jDialog1.setVisible(false);
+        jDialog1.setVisible(false);  
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         //Acion cuando se elije carro
-        poner_datos(jComboBox1.getSelectedIndex());
+        poner_datos(jComboBox1.getSelectedIndex());  //solo llamo la funcion cada ves que alguie elige un elemento nuevo en el comboBox de los carros
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // selecina distancia
-         switch(jComboBox1.getSelectedIndex()){
+         switch(jComboBox1.getSelectedIndex()){ // segun sea la selccion en el comboBox de distancia,seteo el valor ala variable distancia
              case 0: Datos_estaticos.distancia = 500;
                  break;
              case 1: Datos_estaticos.distancia =800;
@@ -576,9 +588,9 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // accion para el boton agregar carro  que esta en el dibujo
-         int cantidad=Datos_estaticos.Lista_simulacion.size(); 
-       if(cantidad <=3){  
-       poner_datos(0); 
+       int cantidad=Datos_estaticos.Lista_simulacion.size();  // obtengo el ramaño de la lista
+       if(cantidad <=3){  //verifico si ya hay 4 elementos  si hay menos entro al if
+       poner_datos(0);   //se ponen los datos del carro lambo que va ser el que va estar por default selecionado
        jDialog1.setVisible(true);
        jDialog1.setSize(500,350);
        jDialog1.repaint();
@@ -587,32 +599,32 @@ public class Ventana_principal extends javax.swing.JFrame {
 
     private void eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar1ActionPerformed
         //elimina el carro en posicion 1
-        jPanel1.removeAll();
+        jPanel1.removeAll(); //elimina todo lso elementos del panel
         elimina_carro(0);
     }//GEN-LAST:event_eliminar1ActionPerformed
 
     private void eliminar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar4ActionPerformed
         // elimina el carro en la posicion 4
-        jPanel1.removeAll();
-        elimina_carro(3);
+        jPanel1.removeAll(); //elimina todo lso elementos del panel
+        elimina_carro(3);  // ingreso el de la posicion de la lista que se va a eliminar (3 por que la lista enpieza en  0)
     }//GEN-LAST:event_eliminar4ActionPerformed
 
-    
+   
+/***************************** funcion para eliminar un carro y reposicionar los restantes *********************/
     public void elimina_carro(int  posicion){
-        eliminar1.setVisible(false);
-        eliminar2.setVisible(false);
-        eliminar3.setVisible(false);
-        eliminar4.setVisible(false);
+       pone_invisible_eliminar(); //pongo todo los botones eliminar invisibles para reajustar los elementos que no son removidos
+       int numero=0; // sirve para ver en que nueva  posicion van a quedar 
+       Datos_estaticos.Lista_simulacion.remove(posicion); // elimino el nodo del carro que se solicito
        
-        int numero=0;
-     Datos_estaticos.Lista_simulacion.remove(posicion);
-     for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){
-            nuevo = ite.next().obten_pista();
-            nuevo.setBounds(40,40+(110*numero),900,85);
-            pone_visible_eliminar(numero);
-            numero+=1;
-            jPanel1.add(nuevo);
+     for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){ // recorro al lista para ver cules quedan
+            nuevo = ite.next().obten_pista();     // obtengo el nodo del recorrido
+            nuevo.setBounds(40,40+(110*numero),900,85); // le doy una nueva ubicacion
+            pone_visible_eliminar(numero); // llamo la funcion para poner el boton eleminar en modo visible
+            numero+=1;  // sumo una para saver que ya dibuje uno
+            jPanel1.add(nuevo); // vuelvo agregar la pisa 
      }
+     
+     /******** *** vuelvo a agregar todos los botones de eliminar .. ya que con removeall- se habian quitado** ***************************/
      jPanel1.add(eliminar1);
      jPanel1.add(eliminar2);
      jPanel1.add(eliminar3);
@@ -622,24 +634,40 @@ public class Ventana_principal extends javax.swing.JFrame {
     }
     
     
-    
+   //********* funcion para poner  visible el boton eliminar segun sea la posicion que se este agregando *********************/
     public void pone_visible_eliminar(int cantidad){
-    if(cantidad==0){
-         eliminar1.setVisible(true);
-       }
-       else if(cantidad == 1){
-        eliminar2.setVisible(true);
-       }
-       else if(cantidad == 2){
-        eliminar3.setVisible(true);
-       }
-       else if(cantidad == 3){
-        eliminar4.setVisible(true);
-       }
-    
+        /// aca solo pongo visible el boton eliminar  segun sea la posiscion solisitada
+        switch(cantidad){
+            case 0: 
+                 eliminar1.setVisible(true);
+                break;
+                case 1: 
+                 eliminar1.setVisible(true);
+                break;
+                    case 2: 
+                 eliminar1.setVisible(true);
+                break;
+                        case 3: 
+                 eliminar1.setVisible(true);
+                break;
+        }
+  
     }
+    
+    
+    //************************** funcion para poner invisible todos los botones de eliminar.**************************************/
+    public void pone_invisible_eliminar(){
+        eliminar1.setVisible(false);
+        eliminar2.setVisible(false);
+        eliminar3.setVisible(false);
+        eliminar4.setVisible(false);
+    }
+    
+    
     //***************funcion para cambar los datos cuando elejan el las lista desplegable. ******************/
     public void poner_datos(int index){
+            /*esta funcion solo setea los valores predeterminados de cada carro, segun sea el numero de peticion el cual es como estan en
+           el comboBox si son setiado a las label que estan en el JDialog.*/
         switch(index){
             case 0:
                 this.caracteristicas.setText(Datos_estaticos.L_nombre);

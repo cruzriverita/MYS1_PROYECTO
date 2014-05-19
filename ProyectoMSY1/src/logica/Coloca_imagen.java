@@ -24,10 +24,10 @@ import javax.swing.JPanel;
 public class Coloca_imagen extends JPanel{
  
     /*  variables para trabajar con el panel  /**/
-  private Image imagen;
+  private Image imagen; // puntero para manejar la imagen del carro que va contener
   private int x=10;
   private int y=20;
-  public  ImageIcon carretera = new ImageIcon("Imagenes/carretera.png");
+  public  ImageIcon carretera = new ImageIcon("Imagenes/carretera.png"); // imagen predeterminada de la carretera
   
    public Coloca_imagen(){
       
@@ -51,13 +51,13 @@ public class Coloca_imagen extends JPanel{
     }
 
     
-  /**********funcion de graphis que se activa cadas ves que un valor cambia**********/  
+  /**********funcion de graphis que se activa cada ves que un valor cambia**********/  
     @Override
     public void paint(Graphics g) {
-         g.drawImage(carretera.getImage(),5,5,900,80,this);
-         g.drawImage(imagen,x,y,75,40,this);
+         g.drawImage(carretera.getImage(),5,5,900,80,this); //agrego la imagen de la carretera
+         g.drawImage(imagen,x,y,75,40,this); // agrego la imagen del carro
          setOpaque(false);
-         super.paint(g);
+         super.paint(g); // pinto 
 
        
     }
