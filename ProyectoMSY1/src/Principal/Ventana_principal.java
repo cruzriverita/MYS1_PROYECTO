@@ -34,15 +34,20 @@ public class Ventana_principal extends javax.swing.JFrame {
      double tvelmax=0;
      double dvelmax=0;
      double trecorrido=0;
-     static double x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,v1,v2,v3,v4,v5;
+     static double x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,v1,v2,v3,v4,v5,v6,v7,v8;
      
      
      //probicional tiene que ser una lista
      Coloca_imagen nuevo;
-     Coloca_imagen nuevo2;
      JLabel vista_datos;
      
+     // panel para mostrar carros al elegir
+     Coloca_imagen nuevo2;
      
+     /********************** variables para mostar la grafica *****************************/
+     Coloca_imagen graficas;
+     int posicion=0;
+     ImageIcon grafica;
     public Ventana_principal() {
         initComponents();
         
@@ -51,6 +56,13 @@ public class Ventana_principal extends javax.swing.JFrame {
        nuevo2.setBounds(15,90,90,80);
        nuevo2.setVisible(true);
        jDialog1.add(nuevo2);
+       /******************************panel para las graficas ***************************/
+       graficas = new Coloca_imagen();
+       graficas.setBounds(250,150,700,500);
+       graficas.setVisible(true);
+       graficas.pone_tamaño(700,500);
+       jDialog2.add(graficas);
+       
        
        /********** pone invisible los botones de eliminar*********/
         pone_invisible_eliminar();
@@ -79,10 +91,15 @@ public class Ventana_principal extends javax.swing.JFrame {
         caracteristicas1 = new javax.swing.JLabel();
         caracteristicas2 = new javax.swing.JLabel();
         caracteristicas3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        caracteristicas4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jDialog2 = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jComboBox3 = new javax.swing.JComboBox();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         eliminar1 = new javax.swing.JButton();
         eliminar2 = new javax.swing.JButton();
@@ -179,6 +196,14 @@ public class Ventana_principal extends javax.swing.JFrame {
         caracteristicas3.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         caracteristicas3.setText("Caracteristicas");
 
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        jLabel8.setText("peso (kg)");
+
+        caracteristicas4.setBackground(new java.awt.Color(255, 255, 255));
+        caracteristicas4.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        caracteristicas4.setText("Caracteristicas");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -189,7 +214,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(35, 35, 35)
-                        .addComponent(caracteristicas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(caracteristicas1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +231,11 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(caracteristicas2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(caracteristicas2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(36, 36, 36)
+                        .addComponent(caracteristicas4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -230,7 +259,11 @@ public class Ventana_principal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(caracteristicas3))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(caracteristicas4))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -325,21 +358,63 @@ public class Ventana_principal extends javax.swing.JFrame {
         jTable2.getColumnModel().getColumn(5).setPreferredWidth(120);
         jTable2.getColumnModel().getColumn(6).setResizable(false);
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Ver desplazamiento");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("ver velocidad");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE))
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialog2Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialog2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton6)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -566,10 +641,28 @@ public class Ventana_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-          jDialog2.setBounds(100, 100, 1200, 300);
+        // boton para ver estadisticas
+         try{
+          limpia_comboBox();
+          this.limpiarTabla(jTable2);
+          this.posicion =0;
+          for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){ // recorro la lista de  simulacion
+           Nodo_simulacion uno= ite.next(); //inicio la simulacion de cada nodo en la lista 
+           this.calculos(uno.obten_tipo(),uno.obten_distancia(),this.posicion);
+           jComboBox3.addItem(String.valueOf(posicion+1)+"-"+uno.obten_etiq().getText());
+           this.posicion +=1;
+          }
+          this.posicion =0;
+          grafica = new ImageIcon("Graficas/0V.jpg");
+          graficas.pone_imagen(grafica.getImage());
+          graficas.repaint();
+          jDialog2.setBounds(100, 100, 1200,750);
           jDialog2.show();
           jDialog2.setLocationRelativeTo(null);
+         }
+         catch(Exception e ){
+         
+         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -636,7 +729,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        this.jPanel1.repaint(); // repinto el panel principanl
        
        jDialog1.setVisible(false); // pongo invisible el Jdialog por que ya termino la accion de agregar
-        this.calculos();
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -706,8 +799,36 @@ public class Ventana_principal extends javax.swing.JFrame {
     
     }//GEN-LAST:event_jDialog2WindowClosing
 
-   
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // pone la grafica de desplazamiento
+        grafica = new ImageIcon("Graficas/"+String.valueOf(this.posicion)+"D.jpg");
+         graficas.pone_imagen(grafica.getImage());
+         graficas.repaint();
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       // pone la grafica de velocidad
+        grafica = new ImageIcon("Graficas/"+String.valueOf(this.posicion)+"V.jpg");
+         graficas.pone_imagen(grafica.getImage());
+         graficas.repaint();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        //eleccion de carro para ver grafica
+       posicion= jComboBox3.getSelectedIndex();
+       jButton7ActionPerformed(evt);
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+   /************************************************************************************/
+    void limpia_comboBox(){
+        try{
+    jComboBox3.removeAllItems();
+    }
+        catch(Exception e){}
+    }
     
+    /************************************************************************************/
     public void limpiarTabla(JTable tabla){
         try {
             DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
@@ -727,7 +848,7 @@ public class Ventana_principal extends javax.swing.JFrame {
        Datos_estaticos.Lista_simulacion.remove(posicion); // elimino el nodo del carro que se solicito
        
      for(Iterator<Nodo_simulacion> ite = Datos_estaticos.Lista_simulacion.iterator(); ite.hasNext();){ // recorro al lista para ver cules quedan
-             Nodo_simulacion cambiar = ite.next();
+            Nodo_simulacion cambiar = ite.next();
             nuevo = cambiar.obten_pista();     // obtengo el nodo del recorrido
             nuevo.setBounds(40,40+(130*numero),900,85); // le doy una nueva ubicacion
             vista_datos = cambiar.obten_etiq();
@@ -827,22 +948,22 @@ public class Ventana_principal extends javax.swing.JFrame {
     
     }
     
-    public void calculos (){
+    public void calculos (int tipo,int distancia,int posicion){
      //Agregar modelo a la tabla de resultados 
       DefaultTableModel modelo1=(DefaultTableModel) jTable2.getModel();
      
-        
         //DECISION SOBRE QUE DATOS MOSTRAR
-      
+      switch(tipo){
       //********************************lamborginhi************************************** 
-       if (jComboBox1.getSelectedItem().equals("Lambor veneno")) {
+       case 0: 
+    
        //CALCULOS
        //aceleracion constante
        this.ac=(200*1000)/(3600*Datos_estaticos.L_aceleracion2);
        //distancia en alcanzar 200km/h
        this.df = (ac*(Datos_estaticos.L_aceleracion2)*(Datos_estaticos.L_aceleracion2))/2;
        //velocidad final alcanzada por el auto
-       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       this.vf= Math.sqrt(2*ac*distancia);
        
        //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
        //de velocidad maxima del auto se coloca tal valor.
@@ -859,11 +980,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
         * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
         */
-       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       if (dvelmax>distancia){
        tvelmax =0;
        dvelmax=0;
        }
-       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       this.trecorrido = Math.sqrt((2*distancia)/ac);
        
        //redondeo de todos los calculos a 5 decimales.
        ac = Math.round(ac * factor) / factor;
@@ -880,38 +1001,92 @@ public class Ventana_principal extends javax.swing.JFrame {
        //********************************GRAFICAR****************************************************
     
        //**************************GRAFICA DE DESPLAZAMIENTO****************************************
-       //coordenadas tiempo eje x
-       x1=trecorrido/5;
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
        x2=x1+x1;
        x3=x2+x1;
        x4=x3+x1;
        x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
        
-       //coordenadas desplazamiento eje y
-       y1 = Integer.parseInt(jComboBox2.getSelectedItem().toString())/5;
-       y2=y1+y1;
-       y3=y2+y1;
-       y4=y3+y1;
-       y5=y4+y1;
-       Graficar.graph(x1,x2,x3,x4,x5,y1,y2,y3,y4,y5,"Desplazamiento_Lamborginhi");
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO LAMBORGINHI",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,String.valueOf(posicion)+"D");
+       
       
        //**************************GRAFICA DE VELOCIDAD*********************************
-       //coordenadas velocidad eje y
-      
-       
-       
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.L_Velocidad_max*1000/3600;
        }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.L_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.L_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO LAMBORGINHI",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,String.valueOf(posicion)+"V");
+       
+       break;
     
        //**********************Vokswagen*********************************//
-       
-       else if (jComboBox1.getSelectedItem().equals("Volkswagen scirocco")) {
+       case 2:
        //CALCULOS
        //aceleracion constante
        this.ac=(200*1000)/(3600*Datos_estaticos.Vw_aceleracion2);
        //distancia en alcanzar 200km/h
        this.df = (ac*(Datos_estaticos.Vw_aceleracion2)*(Datos_estaticos.Vw_aceleracion2))/2;
        //velocidad final alcanzada por el auto
-       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       this.vf= Math.sqrt(2*ac*distancia);
        
        //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
        //de velocidad maxima del auto se coloca tal valor.
@@ -928,11 +1103,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
         * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
         */
-       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       if (dvelmax>distancia){
        tvelmax =0;
        dvelmax=0;
        }
-       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       this.trecorrido = Math.sqrt((2*distancia)/ac);
        
        //redondeo de todos los calculos a 5 decimales.
        ac = Math.round(ac * factor) / factor;
@@ -944,18 +1119,97 @@ public class Ventana_principal extends javax.swing.JFrame {
        
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"Volkswagen",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       
+            //********************************GRAFICAR****************************************************
+    
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
+       
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO VOLKSWAGEN",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,String.valueOf(posicion)+"D");
+       
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.Vw_Velocidad_max*1000/3600;
        }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.Vw_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.Vw_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO VOLKSWAGEN",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,String.valueOf(posicion)+"V");
+       
+       break;
     
        //***********************************************MCLAREN**************************************************
        
-        else if (jComboBox1.getSelectedItem().equals("Mclaren Spider")) {
+       case 1:
        //CALCULOS
        //aceleracion constante
        this.ac=(200*1000)/(3600*Datos_estaticos.M_aceleracion2);
        //distancia en alcanzar 200km/h
        this.df = (ac*(Datos_estaticos.M_aceleracion2)*(Datos_estaticos.M_aceleracion2))/2;
        //velocidad final alcanzada por el auto
-       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       this.vf= Math.sqrt(2*ac*distancia);
        
        //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
        //de velocidad maxima del auto se coloca tal valor.
@@ -972,11 +1226,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
         * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
         */
-       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       if (dvelmax>distancia){
        tvelmax =0;
        dvelmax=0;
        }
-       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       this.trecorrido = Math.sqrt((2*distancia)/ac);
        
        //redondeo de todos los calculos a 5 decimales.
        ac = Math.round(ac * factor) / factor;
@@ -988,18 +1242,97 @@ public class Ventana_principal extends javax.swing.JFrame {
        
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"McLaren",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
+       
+         //********************************GRAFICAR****************************************************
+    
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
+       
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO McLAREN",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,String.valueOf(posicion)+"D");
+       
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.M_Velocidad_max*1000/3600;
        }
        
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.M_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.M_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO MCLAREN",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,String.valueOf(posicion)+"V");
+        
+        break;
+        
        //***********************************************FORD MUSTANG****************************************
        
-         else if (jComboBox1.getSelectedItem().equals("Ford Mustang")) {
+       case 3:
        //CALCULOS
        //aceleracion constante
        this.ac=(200*1000)/(3600*Datos_estaticos.F_aceleracion2);
        //distancia en alcanzar 200km/h
        this.df = (ac*(Datos_estaticos.F_aceleracion2)*(Datos_estaticos.F_aceleracion2))/2;
        //velocidad final alcanzada por el auto
-       this.vf= Math.sqrt(2*ac*Integer.parseInt(jComboBox2.getSelectedItem().toString()));
+       this.vf= Math.sqrt(2*ac*distancia);
        
        //SE evalua si el auto alcanza su velocidad maxima, si el valor de vf es mayor al dato tecnico
        //de velocidad maxima del auto se coloca tal valor.
@@ -1016,11 +1349,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         * el tiempo en alcanzar la velocidad maxima y la distancia en alcanzar la velocidad 
         * maxima no pueden ser calculados y por lo tanto se les asigna un cero.
         */
-       if (dvelmax>Integer.parseInt(jComboBox2.getSelectedItem().toString())){
+       if (dvelmax>distancia){
        tvelmax =0;
        dvelmax=0;
        }
-       this.trecorrido = Math.sqrt((2*Integer.parseInt(jComboBox2.getSelectedItem().toString()))/ac);
+       this.trecorrido = Math.sqrt((2*distancia)/ac);
        
        //redondeo de todos los calculos a 5 decimales.
        ac = Math.round(ac * factor) / factor;
@@ -1032,8 +1365,90 @@ public class Ventana_principal extends javax.swing.JFrame {
        
        //se agrega la fila a la tabla
        modelo1.addRow(new Object[]{"Ford",ac+" m/s^2",df+" m",vf+" m/s",tvelmax+" s",dvelmax+" m",trecorrido+" s"});
-       }
+      
+          //********************************GRAFICAR****************************************************
     
+       //**************************GRAFICA DE DESPLAZAMIENTO****************************************
+       //coordenadas tiempo eje x se divide el tiempo del recorrido total dentro de 8 puntos a graficar 
+       x1=trecorrido/8;
+       x2=x1+x1;
+       x3=x2+x1;
+       x4=x3+x1;
+       x5=x4+x1;
+       x6=x5+x1;
+       x7=x6+x1;
+       x8=x7+x1;
+       
+       //coordenadas desplazamiento eje y, el desplazamiento se calcula df = (at^2)/2
+       y1 = ac*Math.pow(x1,2)/2;
+       y2 = ac*Math.pow(x2,2)/2;
+       y3 = ac*Math.pow(x3,2)/2;
+       y4 = ac*Math.pow(x4,2)/2;
+       y5 = ac*Math.pow(x5,2)/2;
+       y6 = ac*Math.pow(x6,2)/2;
+       y7 = ac*Math.pow(x7,2)/2;
+       y8 = ac*Math.pow(x8,2)/2;
+       //se redondean los tiempos a 5 decimales 
+       x1 = Math.round(x1 * factor) / factor;
+       x2 = Math.round(x2 * factor) / factor;
+       x3 = Math.round(x3 * factor) / factor;
+       x4 = Math.round(x4 * factor) / factor;
+       x5 = Math.round(x5 * factor) / factor;
+       x6 = Math.round(x6 * factor) / factor;
+       x7 = Math.round(x7 * factor) / factor;
+       x8 = Math.round(x8 * factor) / factor;
+       
+       // se llama al metodo para graficar 
+       Graficar.graph("Distancia","DESPLAZAMIENTO-TIEMPO FORD",x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8,String.valueOf(posicion)+"D");
+       
+      
+       //**************************GRAFICA DE VELOCIDAD*********************************
+       //coordenadas velocidad eje y, la velocidad se calcula con la formula vf=at
+       // las decisiones indican que si la velocidad en el tiempo x1, x2, etc. sobrepasa a la velocidad max del vehiculo
+       //entonces la velocidad en ese punto sera la velocidad maxima de los datos tecnicos del vehiculo.
+       v1 = ac*x1;
+       if (v1>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v1=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v2 = ac*x2;
+       if (v2>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v2=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v3 = ac*x3;
+       if (v3>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v3=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v4 = ac*x4;
+       if (v4>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v4=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       v5 = ac*x5;
+       if (v5>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v5=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+       v6 = ac*x6;
+       if (v6>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v6=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+        v7 = ac*x7;
+       if (v7>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v7=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+        v8 = ac*x8;
+       if (v8>(Datos_estaticos.F_Velocidad_max*1000/3600)){
+           v8=Datos_estaticos.F_Velocidad_max*1000/3600;
+       }
+       
+       Graficar.graph("Distancia","VELOCIDAD-TIEMPO FORD",x1,x2,x3,x4,x5,x6,x7,x8,v1,v2,v3,v4,v5,v6,v7,v8,String.valueOf(posicion)+"V");
+       
+       break;
+           
+       default:
+           
+    }
     }
     
     /**
@@ -1073,6 +1488,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JLabel caracteristicas1;
     private javax.swing.JLabel caracteristicas2;
     private javax.swing.JLabel caracteristicas3;
+    private javax.swing.JLabel caracteristicas4;
     private static javax.swing.JButton eliminar1;
     private static javax.swing.JButton eliminar2;
     private static javax.swing.JButton eliminar3;
@@ -1082,8 +1498,11 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
@@ -1093,6 +1512,7 @@ public class Ventana_principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

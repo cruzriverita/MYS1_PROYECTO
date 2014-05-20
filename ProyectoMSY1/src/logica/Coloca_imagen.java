@@ -27,12 +27,15 @@ public class Coloca_imagen extends JPanel{
   private Image imagen; // puntero para manejar la imagen del carro que va contener
   private int x=10;
   private int y=20;
+  private int ancho=75;
+  private int alto=40;
   public  ImageIcon carretera = new ImageIcon("Imagenes/carretera.png"); // imagen predeterminada de la carretera
   
    public Coloca_imagen(){
       
      
                     }
+   
    
  /************* esta funcion es para colocar la imagen en el panel *****************/  
  public void pone_imagen(Image imagen) {
@@ -50,12 +53,16 @@ public class Coloca_imagen extends JPanel{
     this.x = x;
     }
 
+    public void pone_tamaño(int ancho,int alto){
+      this.alto = alto;
+      this.ancho=ancho;
+    }
     
   /**********funcion de graphis que se activa cada ves que un valor cambia**********/  
     @Override
     public void paint(Graphics g) {
          g.drawImage(carretera.getImage(),5,5,900,80,this); //agrego la imagen de la carretera
-         g.drawImage(imagen,x,y,75,40,this); // agrego la imagen del carro
+         g.drawImage(imagen,x,y,ancho,alto,this); // agrego la imagen del carro
          setOpaque(false);
          super.paint(g); // pinto 
 

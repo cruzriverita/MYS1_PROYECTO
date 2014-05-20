@@ -114,7 +114,9 @@ public class Nodo_simulacion {
     return datos;
     }
     
-    
+    public int obten_tipo(){
+    return  tipo_carro;
+    }
     
     /*--------------------------------------------------------------------------------------------------*/
     
