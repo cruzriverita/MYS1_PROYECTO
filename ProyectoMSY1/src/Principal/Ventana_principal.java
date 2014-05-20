@@ -910,6 +910,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas1.setText(String.valueOf(Datos_estaticos.L_Velocidad_max));
                 this.caracteristicas2.setText(String.valueOf(Datos_estaticos.L_aceleracion));
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.L_aceleracion2));
+                this.caracteristicas4.setText(String.valueOf(Datos_estaticos.L_peso));
                 imagen = new ImageIcon(Datos_estaticos.L_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
                 Datos_estaticos.tipo_carro =0;
@@ -919,6 +920,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas1.setText(String.valueOf(Datos_estaticos.M_Velocidad_max));
                 this.caracteristicas2.setText(String.valueOf(Datos_estaticos.M_aceleracion));
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.M_aceleracion2));
+                this.caracteristicas4.setText(String.valueOf(Datos_estaticos.M_peso));
                 imagen = new ImageIcon(Datos_estaticos.M_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
                 Datos_estaticos.tipo_carro =1;
@@ -928,6 +930,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas1.setText(String.valueOf(Datos_estaticos.Vw_Velocidad_max));
                 this.caracteristicas2.setText(String.valueOf(Datos_estaticos.Vw_aceleracion));
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.Vw_aceleracion2));
+                this.caracteristicas4.setText(String.valueOf(Datos_estaticos.Vw_peso));
                 imagen = new ImageIcon(Datos_estaticos.Vw_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
                 Datos_estaticos.tipo_carro =2;
@@ -937,6 +940,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                 this.caracteristicas1.setText(String.valueOf(Datos_estaticos.F_Velocidad_max));
                 this.caracteristicas2.setText(String.valueOf(Datos_estaticos.F_aceleracion));
                 this.caracteristicas3.setText(String.valueOf(Datos_estaticos.F_aceleracion2));
+                this.caracteristicas4.setText(String.valueOf(Datos_estaticos.F_peso));
                 imagen = new ImageIcon(Datos_estaticos.F_imagen);
                 nuevo2.pone_imagen(imagen.getImage());
                 Datos_estaticos.tipo_carro =3;
